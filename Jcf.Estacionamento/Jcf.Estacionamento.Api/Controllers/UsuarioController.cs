@@ -2,6 +2,7 @@
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
 using Jcf.Estacionamento.Api.Models;
 using Jcf.Estacionamento.Api.Models.DTOs.Usuario;
+using Jcf.Estacionamento.Api.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -85,6 +86,7 @@ namespace Jcf.Estacionamento.Api.Controllers
 
                 var usuario = _mapper.Map<Usuario>(novo);
                 usuario.UsuarioCriacaoId = GetUsuarioIdToken();
+                usuario.Senha = SenhaUtil.CriarHashMD5(novo.Senha);
 
                 await _usuarioRepositorio.AddAsync(usuario);                
                 var usuarioResponseDTO = _mapper.Map<UsuarioResponseDTO>(usuario);
@@ -108,7 +110,7 @@ namespace Jcf.Estacionamento.Api.Controllers
             {
                 if(id != updateDTO.Id)
                 {
-                    apiResponse.Erro(new List<string> { "id não validado!" });
+                    apiResponse.Erro(new List<string> { "id não validado!" }, HttpStatusCode.Ambiguous);
                     return BadRequest(apiResponse);
                 }
 
@@ -155,6 +157,34 @@ namespace Jcf.Estacionamento.Api.Controllers
                 return NoContent();
             }
             catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                apiResponse.Erro(new List<string> { ex.Message });
+                return BadRequest(apiResponse);
+            }
+        }
+
+        #endregion
+
+        #region Login
+
+        [HttpPost]
+        [Route("api/[controller]/[action]")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO login)
+        {
+            var apiResponse = new ApiResponse();
+            try
+            {
+                var usuario = await _usuarioRepositorio.AutenticarAsync(login.UserName, SenhaUtil.CriarHashMD5(login.Senha));
+                if (usuario is null)
+                {
+                    apiResponse.Erro(new List<string> { "UserName ou Senha Inválida" }, HttpStatusCode.Unauthorized);
+                    return Unauthorized(apiResponse);
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 apiResponse.Erro(new List<string> { ex.Message });

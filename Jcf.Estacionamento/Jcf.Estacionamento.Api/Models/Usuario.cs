@@ -16,6 +16,8 @@ namespace Jcf.Estacionamento.Api.Models
         [StringLength(255)]
         public string Senha { get; set; }
 
+        public string Role { get; set; } = "BASIC";
+
         public Usuario(string nome, string email, string senha, Guid? usuarioCriacaoId = null) : base(usuarioCriacaoId)
         {
             Nome = nome;
