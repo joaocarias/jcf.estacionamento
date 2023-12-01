@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Jcf.Estacionamento.Api.Entidades
+namespace Jcf.Estacionamento.Api.Models
 {
     public class Usuario : EntidadeBase
     {
@@ -22,5 +22,7 @@ namespace Jcf.Estacionamento.Api.Entidades
             Email = email;
             Senha = senha;
         }
+
+        private Usuario() { }
     }
 }

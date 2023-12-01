@@ -1,11 +1,29 @@
+using Jcf.Estacionamento.Api.Configs;
+using Jcf.Estacionamento.Api.Data.Contextos;
+using Jcf.Estacionamento.Api.Data.Repositorios;
+using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+Console.WriteLine(builder.Configuration.GetSection("EnvironmentName").Value);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddNewtonsoftJson(x =>
+    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppContexto>(options =>
+                        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+
 
 var app = builder.Build();
 
