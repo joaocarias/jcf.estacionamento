@@ -30,7 +30,8 @@ namespace Jcf.Estacionamento.Api.Controllers
         #region crud 
 
         [HttpGet]
-        [Route("api/[controller]/{id}")]        
+        [Route("api/[controller]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get([Required] Guid id)
         {
             var apiResponse = new ApiResponse();
@@ -55,7 +56,7 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]")]
+        [Route("api/[controller]/[Action]")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Listar()
         {
@@ -93,8 +94,8 @@ namespace Jcf.Estacionamento.Api.Controllers
 
                 await _usuarioRepositorio.AddAsync(usuario);                
                 var usuarioResponseDTO = _mapper.Map<UsuarioResponseDTO>(usuario);
-                apiResponse.Resultado = usuarioResponseDTO;
-                return CreatedAtRoute(nameof(Get), new { id = usuario.Id }, usuarioResponseDTO);
+                apiResponse.Resultado = usuarioResponseDTO;              
+                return CreatedAtAction(nameof(Get), new { id = usuario.Id }, apiResponse);
             }
             catch(Exception ex)
             {
@@ -105,7 +106,7 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]/{id}")]
+        [Route("api/[controller]")]
         public async Task<IActionResult> Atualizar([Required] Guid id, [FromBody] UsuarioAtualizarDTO updateDTO)
         {
             var apiResponse = new ApiResponse();
@@ -141,7 +142,7 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("api/[controller]/{id}")]
+        [Route("api/[controller]")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Remover([Required] Guid id)
         {
@@ -173,6 +174,7 @@ namespace Jcf.Estacionamento.Api.Controllers
 
         [HttpPost]
         [Route("api/[controller]/[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
             var apiResponse = new ApiResponse();
@@ -187,7 +189,7 @@ namespace Jcf.Estacionamento.Api.Controllers
 
                 apiResponse.Resultado = new LoginResponseDTO()
                 {                  
-                    Usuario = new UsuarioResponseDTO() { Email = usuario.Email, Nome = usuario.Nome },             
+                    Usuario = new UsuarioResponseDTO() { Id = usuario.Id, Email = usuario.Email, Nome = usuario.Nome },             
                     Token = _tokenService.NovoToken(usuario)
                 };
                 return Ok(apiResponse);

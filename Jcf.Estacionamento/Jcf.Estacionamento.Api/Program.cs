@@ -43,7 +43,7 @@ builder.Services.AddSwaggerGen(c =>
     });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
-        Description = "Copie 'Bearer ' + token' ",
+        Description = "Copie 'Bearer + token' ",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
@@ -93,8 +93,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
