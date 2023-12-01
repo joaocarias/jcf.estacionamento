@@ -38,5 +38,13 @@ namespace Jcf.Estacionamento.Api.Models
             DataCriacao = DateTime.UtcNow;
             UsuarioCriacaoId = usuarioCriacaoId;
         }
+
+        public EntidadeBase(Guid id, Guid? usuarioCriacaoId = null)
+        {
+            Ativo = true;
+            DataCriacao = DateTime.UtcNow;
+            UsuarioCriacaoId = usuarioCriacaoId;
+            Id = id;
+        }
     }
 }

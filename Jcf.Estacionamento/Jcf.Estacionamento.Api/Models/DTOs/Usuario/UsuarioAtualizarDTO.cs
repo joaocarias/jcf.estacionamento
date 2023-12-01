@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
 
 namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
 {
@@ -16,6 +15,5 @@ namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
         {
             Nome = string.Empty;    
         }
-
     }
 }

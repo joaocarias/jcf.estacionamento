@@ -2,6 +2,7 @@
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
 using Jcf.Estacionamento.Api.Models;
 using Jcf.Estacionamento.Api.Models.DTOs.Usuario;
+using Jcf.Estacionamento.Api.Servicos.IServicos;
 using Jcf.Estacionamento.Api.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +17,14 @@ namespace Jcf.Estacionamento.Api.Controllers
         private readonly ILogger<UsuarioController> _logger;
         private readonly IMapper _mapper;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ITokenServico _tokenService;
 
-        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepositorio usuarioRepositorio, IMapper mapper)
+        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepositorio usuarioRepositorio, IMapper mapper, ITokenServico tokenService)
         {
             _logger = logger;
             _usuarioRepositorio = usuarioRepositorio;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
 
         #region crud 
@@ -182,7 +185,12 @@ namespace Jcf.Estacionamento.Api.Controllers
                     return Unauthorized(apiResponse);
                 }
 
-                return Ok();
+                apiResponse.Resultado = new LoginResponseDTO()
+                {                  
+                    Usuario = new UsuarioResponseDTO() { Email = usuario.Email, Nome = usuario.Nome },             
+                    Token = _tokenService.NovoToken(usuario)
+                };
+                return Ok(apiResponse);
             }
             catch (Exception ex)
             {

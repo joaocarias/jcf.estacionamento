@@ -1,4 +1,6 @@
-﻿namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
+﻿using Jcf.Estacionamento.Api.Extensoes;
+
+namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
 {
     public class UsuarioResponseDTO
     {
@@ -7,6 +9,14 @@
         public string Nome { get; set; }
 
         public string Email { get; set; }
+
+        public string PrimeiroNome
+        {
+            get
+            {
+                return Nome.PrimeiraParte();
+            }
+        }
 
         public UsuarioResponseDTO()
         {
