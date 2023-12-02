@@ -64,6 +64,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IEstacionamentoRepositorio, EstacionamentoRepositorio>();
+builder.Services.AddScoped<IEstacionamentoVeiculoRepositorio, EstacionamentoVeiculoRepositorio>();
 
 builder.Services.AddScoped<ITokenServico, TokenServico>();
 

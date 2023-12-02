@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Jcf.Estacionamento.Api.Data.Repositorios;
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
 using Jcf.Estacionamento.Api.Models;
 using Jcf.Estacionamento.Api.Models.DTOs.Estacionamento;
-using Jcf.Estacionamento.Api.Models.DTOs.Usuario;
 using Jcf.Estacionamento.Api.Models.Records.Estacionamento;
-using Jcf.Estacionamento.Api.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;

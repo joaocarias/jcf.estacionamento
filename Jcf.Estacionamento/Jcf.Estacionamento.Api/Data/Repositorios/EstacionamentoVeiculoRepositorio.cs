@@ -1,25 +1,26 @@
 ﻿using Jcf.Estacionamento.Api.Data.Contextos;
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
+using Jcf.Estacionamento.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jcf.Estacionamento.Api.Data.Repositorios
 {
-    public class EstacionamentoRepositorio : IEstacionamentoRepositorio
+    public class EstacionamentoVeiculoRepositorio : IEstacionamentoVeiculoRepositorio
     {
         private readonly AppContexto _appContexto;
-        private readonly ILogger<EstacionamentoRepositorio> _logger;
+        private readonly ILogger<EstacionamentoVeiculoRepositorio> _logger;
 
-        public EstacionamentoRepositorio(AppContexto appContexto, ILogger<EstacionamentoRepositorio> logger)
+        public EstacionamentoVeiculoRepositorio(AppContexto appContexto, ILogger<EstacionamentoVeiculoRepositorio> logger)
         {
             _appContexto = appContexto;
             _logger = logger;
         }
 
-        public async Task<Models.Estacionamento?> AddAsync(Models.Estacionamento entidade)
+        public async Task<EstacionamentoVeiculo?> AddAsync(EstacionamentoVeiculo entidade)
         {
             try
             {
-                await _appContexto.Estacionamentos.AddAsync(entidade);
+                await _appContexto.EstacionamentoVeiculo.AddAsync(entidade);
                 await _appContexto.SaveChangesAsync();
 
                 return entidade;
@@ -31,7 +32,7 @@ namespace Jcf.Estacionamento.Api.Data.Repositorios
             }
         }
 
-        public bool Delete(Models.Estacionamento entidade)
+        public bool Delete(EstacionamentoVeiculo entidade)
         {
             try
             {
@@ -45,12 +46,11 @@ namespace Jcf.Estacionamento.Api.Data.Repositorios
             }
         }
 
-        public async Task<Models.Estacionamento?> GetByIdAsync(Guid id)
+        public async Task<EstacionamentoVeiculo?> GetByIdAsync(Guid id)
         {
             try
             {
-                return await _appContexto.Estacionamentos
-                                .Include(x => x.VagasPreenchidas.Where(x => x.Ativo))
+                return await _appContexto.EstacionamentoVeiculo
                                 .AsNoTracking()
                                 .Where(_ => _.Ativo && _.Id == id)
                                 .SingleOrDefaultAsync();
@@ -62,13 +62,11 @@ namespace Jcf.Estacionamento.Api.Data.Repositorios
             }
         }
 
-        public async Task<IEnumerable<Models.Estacionamento>> ListarAsync()
+        public async Task<IEnumerable<EstacionamentoVeiculo>> ListarAsync()
         {
             try
             {
-                return await _appContexto                                
-                                .Estacionamentos
-                                .Include(x => x.VagasPreenchidas.Where(x => x.Ativo))
+                return await _appContexto.EstacionamentoVeiculo
                                 .AsNoTracking()
                                 .Where(_ => _.Ativo)
                                 .ToListAsync();
@@ -76,15 +74,15 @@ namespace Jcf.Estacionamento.Api.Data.Repositorios
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return Enumerable.Empty<Models.Estacionamento>();
+                return Enumerable.Empty<EstacionamentoVeiculo>();
             }
         }
 
-        public Models.Estacionamento? Update(Models.Estacionamento entidade)
+        public EstacionamentoVeiculo? Update(EstacionamentoVeiculo entidade)
         {
             try
             {
-                _appContexto.Estacionamentos.Update(entidade);
+                _appContexto.EstacionamentoVeiculo.Update(entidade);
                 _appContexto.SaveChanges();
 
                 return entidade;
