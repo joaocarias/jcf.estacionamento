@@ -78,7 +78,8 @@ namespace Jcf.Estacionamento.Api.Controllers
                 estacionamento.UsuarioCriacaoId = GetUsuarioIdToken();
                 
                 await _estacionamentoRepositorio.AddAsync(estacionamento);
-                apiResponse.Resultado = _mapper.Map<EstacionamentoResponseDTO>(estacionamento); ;
+                apiResponse.Resultado = _mapper.Map<EstacionamentoResponseDTO>(estacionamento);
+                apiResponse.StatusCode = HttpStatusCode.Created;
                 return CreatedAtAction(nameof(Get), new { id = estacionamento.Id }, apiResponse);
             }
             catch (Exception ex)

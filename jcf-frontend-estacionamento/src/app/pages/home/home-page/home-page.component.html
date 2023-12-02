@@ -1,0 +1,51 @@
+<app-header-default></app-header-default>
+
+<div class="container">
+
+
+<ng-template #noConnection>
+              
+    <div class="card">
+        <div class="card-header">
+            <strong>Tentando Conectar a API (Backend) ...</strong>
+        </div>
+        <div class="card-body">
+            <app-spinner></app-spinner>
+        
+            <hr />
+
+            <p>Tentando conectar o backend no endereço: {{ apiUrl }}</p>
+
+        </div>
+
+    </div>
+
+</ng-template>
+
+    <div class="card" *ngIf="isConnected; else noConnection">
+        <div class="card-header">
+            <strong>Informações Básicas</strong>
+        </div>
+        <div class="card-body">
+            <p><strong>Exite dois usuários cadastros via seed:</strong></p>
+            <ul>
+                <li>
+                    usuario: <strong>basico@email.com</strong> e senha: <strong>102030</strong>, este com permissões de <strong>Usuário Básico</strong>.
+                </li>
+                <li>
+                    usuario: <strong>admin@email.com</strong> e senha: <strong>102030</strong>, este com permissões de <strong>Usuário Administrador</strong>.
+                </li>
+            </ul>
+
+            <hr />
+            <div class="">
+                <button type="button" class="btn btn-dark" [routerLink]="['/login']"><strong>Clique aqui para ir para a tela de login</strong></button>
+            </div>
+            
+        </div>
+        <div class="card-footer">
+           
+        </div>
+    </div>
+
+</div>

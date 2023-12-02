@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jcf.Estacionamento.Api", "Jcf.Estacionamento.Api\Jcf.Estacionamento.Api.csproj", "{6F82BB47-5C31-404E-84CC-5A57D3EF2B00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jcf.Estacionamento.Test", "Jcf.Estacionamento.Test\Jcf.Estacionamento.Test.csproj", "{B59C6B9C-282A-455E-BD7A-A6028DB7CFD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jcf.Estacionamento.Test", "Jcf.Estacionamento.Test\Jcf.Estacionamento.Test.csproj", "{B59C6B9C-282A-455E-BD7A-A6028DB7CFD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -17,7 +17,7 @@ namespace Jcf.Estacionamento.Api.Models
         [Required]
         public int TotalVagasGrandes { get; set; } = 0;
 
-        public IEnumerable<EstacionamentoVeiculo> VagasPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculo>();
+        public IEnumerable<EstacionamentoVeiculo>? VagasPreenchidas { get; set; }
 
 
         //public IEnumerable<EstacionamentoVeiculo> VagasMotoPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculo>();

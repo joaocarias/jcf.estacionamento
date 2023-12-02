@@ -91,7 +91,8 @@ namespace Jcf.Estacionamento.Api.Controllers
 
                 await _usuarioRepositorio.AddAsync(usuario);                
                 var usuarioResponseDTO = _mapper.Map<UsuarioResponseDTO>(usuario);
-                apiResponse.Resultado = usuarioResponseDTO;              
+                apiResponse.Resultado = usuarioResponseDTO;
+                apiResponse.StatusCode = HttpStatusCode.Created;
                 return CreatedAtAction(nameof(Get), new { id = usuario.Id }, apiResponse);
             }
             catch(Exception ex)

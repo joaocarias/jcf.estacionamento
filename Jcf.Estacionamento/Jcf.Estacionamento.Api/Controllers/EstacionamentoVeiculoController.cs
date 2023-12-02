@@ -2,7 +2,6 @@
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
 using Jcf.Estacionamento.Api.Extensoes;
 using Jcf.Estacionamento.Api.Models;
-using Jcf.Estacionamento.Api.Models.DTOs.Estacionamento;
 using Jcf.Estacionamento.Api.Models.DTOs.EstacionamentoVeiculo;
 using Jcf.Estacionamento.Api.Models.Records.EstacionamentoVeiculo;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +17,15 @@ namespace Jcf.Estacionamento.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IEstacionamentoRepositorio _estacionamentoRepositorio;
         private readonly IEstacionamentoVeiculoRepositorio _estacionamentoVeiculoRepositorio;
+        private readonly IVeiculoRepositorio _veiculoRepositorio;
 
-        public EstacionamentoVeiculoController(ILogger<UsuarioController> logger, IMapper mapper, IEstacionamentoRepositorio estacionamentoRepositorio, IEstacionamentoVeiculoRepositorio estacionamentoVeiculoRepositorio)
+        public EstacionamentoVeiculoController(ILogger<UsuarioController> logger, IMapper mapper, IEstacionamentoRepositorio estacionamentoRepositorio, IEstacionamentoVeiculoRepositorio estacionamentoVeiculoRepositorio, IVeiculoRepositorio veiculoRepositorio)
         {
             _logger = logger;
             _mapper = mapper;
             _estacionamentoRepositorio = estacionamentoRepositorio;
             _estacionamentoVeiculoRepositorio = estacionamentoVeiculoRepositorio;
+            _veiculoRepositorio = veiculoRepositorio;
         }
 
         [HttpPost]
@@ -35,6 +36,7 @@ namespace Jcf.Estacionamento.Api.Controllers
             try
             {
                 var veiculo = new Veiculo(estacionar.VeiculoTipo, GetUsuarioIdToken());
+                
                 var estacionamento = await _estacionamentoRepositorio.GetByIdAsync(estacionar.EstacionamentoId);
                 if (estacionamento == null)
                 {
@@ -42,8 +44,15 @@ namespace Jcf.Estacionamento.Api.Controllers
                     return NotFound(apiResponse);
                 }
 
+                veiculo = await _veiculoRepositorio.AddAsync(veiculo);
+                if(veiculo == null)
+                {
+                    apiResponse.Erro(new List<string> { "Não foi possível criar veículo" }, HttpStatusCode.BadRequest);
+                    return BadRequest(apiResponse);
+                }
+
                 var vagaPreenchida = estacionamento.Estacionar(veiculo);
-                if(vagaPreenchida is not null)
+                if(vagaPreenchida is null)
                 {
                     apiResponse.Erro(new List<string> { "Não foi possível encontrar vaga" }, HttpStatusCode.BadRequest);
                     return BadRequest(apiResponse);
@@ -51,7 +60,8 @@ namespace Jcf.Estacionamento.Api.Controllers
                 
                 vagaPreenchida = await _estacionamentoVeiculoRepositorio.AddAsync(vagaPreenchida);
                 apiResponse.Resultado = vagaPreenchida;
-                return CreatedAtAction(nameof(Get), new { id = vagaPreenchida?.Id, apiResponse });
+                apiResponse.StatusCode = HttpStatusCode.Created;
+                return CreatedAtAction(nameof(Get), new { id = vagaPreenchida?.Id }, apiResponse);                
             }
             catch(Exception ex)
             {

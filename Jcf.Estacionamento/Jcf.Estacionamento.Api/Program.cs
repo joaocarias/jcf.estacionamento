@@ -33,7 +33,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "Jcf Estacionamento",
         Version = "v1",
-        Description = "Teste para Programador C#",
+        Description = "Teste para Programador C# - Foi desenvolvido um projeto FrontEnd em Angular. Para acessar o projeto acesse a pasta /Jcf.Frontend.Estacionamento",
         Contact = new OpenApiContact
         {
             Name = "Joao Carias de Franca",
@@ -65,6 +65,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IEstacionamentoRepositorio, EstacionamentoRepositorio>();
 builder.Services.AddScoped<IEstacionamentoVeiculoRepositorio, EstacionamentoVeiculoRepositorio>();
+builder.Services.AddScoped<IVeiculoRepositorio, VeiculoRepositorio>();
 
 builder.Services.AddScoped<ITokenServico, TokenServico>();
 
@@ -86,12 +87,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(option =>
+ option
+    .AllowAnyOrigin()
+    // .WithHeaders("accept", "content-type", "origin", "authorization")
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+ );
 
 app.UseHttpsRedirection();
 
@@ -99,5 +110,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapFallbackToFile("index.html");
 
 app.Run();

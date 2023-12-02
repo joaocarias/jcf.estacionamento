@@ -51,7 +51,7 @@ namespace Jcf.Estacionamento.Api.Extensoes
         {
             try
             {
-                if (!veiculo.Tipo.Equals(EVeiculoTipo.Van))
+                if (veiculo.Tipo.Equals(EVeiculoTipo.Van))
                 {             
                     if (estacionamento.TotalVagasCarro - estacionamento.VagasPreenchidas.Where(x => x.Ativo && x.Tipo.Equals(EVeiculoTipo.Carro)).Sum(x => x.Ocupacao) < 3)
                     {
