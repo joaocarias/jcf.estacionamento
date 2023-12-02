@@ -9,6 +9,8 @@ namespace Jcf.Estacionamento.Api.Data.Contextos
         public AppContexto(DbContextOptions<AppContexto> options) : base(options) { }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Models.Estacionamento> Estacionamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

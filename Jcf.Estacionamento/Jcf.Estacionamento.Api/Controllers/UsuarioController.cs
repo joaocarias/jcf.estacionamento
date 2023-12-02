@@ -11,7 +11,8 @@ using System.Net;
 
 namespace Jcf.Estacionamento.Api.Controllers
 {
-    [ApiController]   
+    [ApiController]
+    [Route("api/[controller]")]
     public class UsuarioController : MeuController
     {
         private readonly ILogger<UsuarioController> _logger;
@@ -29,8 +30,7 @@ namespace Jcf.Estacionamento.Api.Controllers
 
         #region crud 
 
-        [HttpGet]
-        [Route("api/[controller]")]
+        [HttpGet]      
         [AllowAnonymous]
         public async Task<IActionResult> Get([Required] Guid id)
         {
@@ -75,7 +75,6 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]")]
         [AllowAnonymous]
         public async Task<IActionResult> Novo([FromBody] UsuarioDTO novo)
         {
@@ -106,7 +105,6 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]")]
         public async Task<IActionResult> Atualizar([Required] Guid id, [FromBody] UsuarioAtualizarDTO updateDTO)
         {
             var apiResponse = new ApiResponse();
@@ -142,7 +140,6 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("api/[controller]")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Remover([Required] Guid id)
         {

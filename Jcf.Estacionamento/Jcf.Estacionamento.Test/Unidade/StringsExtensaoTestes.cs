@@ -3,7 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Jcf.Estacionamento.Test.Unidade
 {
-    public class StringsExtensaoTeste
+    public class StringsExtensaoTestes
     {
         [Theory]
         [InlineData("(84) 99682-8298")]
