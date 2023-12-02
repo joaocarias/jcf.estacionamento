@@ -126,7 +126,7 @@ namespace Jcf.Estacionamento.Api.Controllers
                 usuario.UsuarioAtualizacaoId = GetUsuarioIdToken();
 
                 usuario = _usuarioRepositorio.Update(usuario);
-                apiResponse.Resultado = _mapper.Map<UsuarioDTO>(usuario);
+                apiResponse.Resultado = _mapper.Map<UsuarioResponseDTO>(usuario);
                 return Ok(apiResponse);
             }
             catch(Exception ex)

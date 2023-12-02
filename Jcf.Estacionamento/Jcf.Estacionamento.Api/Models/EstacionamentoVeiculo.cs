@@ -31,5 +31,7 @@ namespace Jcf.Estacionamento.Api.Models
             Tipo = tipo;
             Ocupacao = ocupacao;
         }
+
+        private EstacionamentoVeiculo() { }
     }
 }

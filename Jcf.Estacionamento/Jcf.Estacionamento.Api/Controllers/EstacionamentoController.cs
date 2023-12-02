@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
+using Jcf.Estacionamento.Api.Data.Repositorios;
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
 using Jcf.Estacionamento.Api.Models;
 using Jcf.Estacionamento.Api.Models.DTOs.Estacionamento;
 using Jcf.Estacionamento.Api.Models.DTOs.Usuario;
+using Jcf.Estacionamento.Api.Models.Records.Estacionamento;
+using Jcf.Estacionamento.Api.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace Jcf.Estacionamento.Api.Controllers
@@ -25,7 +30,7 @@ namespace Jcf.Estacionamento.Api.Controllers
 
         #region crud
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id) 
         {
             var apiResponse = new ApiResponse();
@@ -42,6 +47,108 @@ namespace Jcf.Estacionamento.Api.Controllers
                 return Ok(apiResponse);
             }
             catch (Exception ex) 
+            {
+                _logger.LogError(ex.Message);
+                apiResponse.Erro(new List<string> { ex.Message });
+                return BadRequest(apiResponse);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Listar()
+        {
+            var apiResponse = new ApiResponse();
+            try
+            {
+                apiResponse.Resultado = _mapper.Map<IEnumerable<EstacionamentoResponseDTO>>(await _estacionamentoRepositorio.ListarAsync());
+                return Ok(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                apiResponse.Erro(new List<string> { ex.Message });
+                return BadRequest(apiResponse);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Novo([FromBody] EstacionamentoDTO novo)
+        {
+            var apiResponse = new ApiResponse();
+            try
+            {
+                var estacionamento = _mapper.Map<Models.Estacionamento>(novo);
+                estacionamento.UsuarioCriacaoId = GetUsuarioIdToken();
+                
+                await _estacionamentoRepositorio.AddAsync(estacionamento);
+                apiResponse.Resultado = _mapper.Map<EstacionamentoResponseDTO>(estacionamento); ;
+                return CreatedAtAction(nameof(Get), new { id = estacionamento.Id }, apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                apiResponse.Erro(new List<string> { ex.Message });
+                return BadRequest(apiResponse);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Atualizar([Required] Guid id, [FromBody] EstacionamentoAtualizar update)
+        {
+            var apiResponse = new ApiResponse();
+            try
+            {
+                if (id != update.Id)
+                {
+                    apiResponse.Erro(new List<string> { "id não validado!" }, HttpStatusCode.Ambiguous);
+                    return BadRequest(apiResponse);
+                }
+
+                var estacionamento = await _estacionamentoRepositorio.GetByIdAsync(id);
+                if (estacionamento is null)
+                {
+                    apiResponse.Erro(new List<string> { "Não encontrado!" }, HttpStatusCode.NotFound);
+                    return NotFound(apiResponse);
+                }
+
+                estacionamento.Nome = update.Nome;
+                estacionamento.TotalVagasMoto = update.TotalVagasMoto;
+                estacionamento.TotalVagasCarro = update.TotalVagasCarro;
+                estacionamento.TotalVagasGrandes = update.TotalVagasGrandes;
+                estacionamento.DataAtualizacao = DateTime.UtcNow;
+                estacionamento.UsuarioAtualizacaoId = GetUsuarioIdToken();
+
+                estacionamento = _estacionamentoRepositorio.Update(estacionamento);
+                apiResponse.Resultado = _mapper.Map<EstacionamentoResponseDTO>(estacionamento);
+                return Ok(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                apiResponse.Erro(new List<string> { ex.Message });
+                return BadRequest(apiResponse);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> Remover([Required] Guid id)
+        {
+            var apiResponse = new ApiResponse();
+            try
+            {
+                var estacionamento = await _estacionamentoRepositorio.GetByIdAsync(id);
+                if (estacionamento is null)
+                {
+                    apiResponse.Erro(new List<string> { "Não encontrado!" }, HttpStatusCode.NotFound);
+                    return NotFound(apiResponse);
+                }
+
+                estacionamento.Remover(GetUsuarioIdToken());
+                var retorno = _estacionamentoRepositorio.Delete(estacionamento);
+                return NoContent();
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 apiResponse.Erro(new List<string> { ex.Message });

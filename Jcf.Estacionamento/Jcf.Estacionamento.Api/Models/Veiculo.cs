@@ -13,5 +13,17 @@ namespace Jcf.Estacionamento.Api.Models
         {
             Placa = PlacaUtil.Gerar();
         }
+
+        public Veiculo(string placa, EVeiculoTipo tipo, Guid? usuarioCriacaoId = null) : base(usuarioCriacaoId)
+        {
+            Placa = placa;
+            Tipo = tipo;
+        }
+
+        public Veiculo(EVeiculoTipo tipo, Guid? usuarioCriacaoId = null) : base(usuarioCriacaoId)
+        {
+            Placa = PlacaUtil.Gerar();
+            Tipo = tipo;
+        }
     }
 }

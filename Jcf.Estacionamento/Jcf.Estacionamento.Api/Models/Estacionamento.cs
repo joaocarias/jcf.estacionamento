@@ -1,11 +1,20 @@
-﻿namespace Jcf.Estacionamento.Api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Jcf.Estacionamento.Api.Models
 {
     public class Estacionamento : EntidadeBase
     {
-        public string Nome {  get; set; }
+        [Required]
+        [StringLength(255)]
+        public string Nome { get; set; }
 
+        [Required]
         public int TotalVagasMoto { get; set; } = 0;
+
+        [Required]
         public int TotalVagasCarro { get; set; } = 0;
+
+        [Required]
         public int TotalVagasGrandes { get; set; } = 0;
 
         public IEnumerable<EstacionamentoVeiculo> VagasPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculo>();
