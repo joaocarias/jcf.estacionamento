@@ -30,8 +30,7 @@ namespace Jcf.Estacionamento.Api.Controllers
 
         #region crud 
 
-        [HttpGet]      
-        [AllowAnonymous]
+        [HttpGet("{id}")]     
         public async Task<IActionResult> Get([Required] Guid id)
         {
             var apiResponse = new ApiResponse();
@@ -56,7 +55,6 @@ namespace Jcf.Estacionamento.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/[Action]")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Listar()
         {
@@ -104,7 +102,7 @@ namespace Jcf.Estacionamento.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Atualizar([Required] Guid id, [FromBody] UsuarioAtualizarDTO updateDTO)
         {
             var apiResponse = new ApiResponse();
@@ -139,7 +137,7 @@ namespace Jcf.Estacionamento.Api.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Remover([Required] Guid id)
         {
@@ -170,7 +168,7 @@ namespace Jcf.Estacionamento.Api.Controllers
         #region Login
 
         [HttpPost]
-        [Route("api/[controller]/[action]")]
+        [Route("[action]")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {

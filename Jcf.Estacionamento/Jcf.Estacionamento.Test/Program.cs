@@ -63,7 +63,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-builder.Services.AddScoped<IEstacionamentoRepositorio, EstacionamentoRepositorio>();
 
 builder.Services.AddScoped<ITokenServico, TokenServico>();
 

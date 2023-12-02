@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
 using Jcf.Estacionamento.Api.Models;
-using Microsoft.AspNetCore.Authorization;
+using Jcf.Estacionamento.Api.Models.DTOs.Estacionamento;
+using Jcf.Estacionamento.Api.Models.DTOs.Usuario;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Jcf.Estacionamento.Api.Controllers
 {
@@ -11,11 +14,13 @@ namespace Jcf.Estacionamento.Api.Controllers
     {
         private readonly ILogger<UsuarioController> _logger;
         private readonly IMapper _mapper;
+        private readonly IEstacionamentoRepositorio _estacionamentoRepositorio;
 
-        public EstacionamentoController(ILogger<UsuarioController> logger, IMapper mapper)
+        public EstacionamentoController(ILogger<UsuarioController> logger, IMapper mapper, IEstacionamentoRepositorio estacionamentoRepositorio)
         {
             _logger = logger;
             _mapper = mapper;
+            _estacionamentoRepositorio = estacionamentoRepositorio;
         }
 
         #region crud
@@ -26,8 +31,15 @@ namespace Jcf.Estacionamento.Api.Controllers
             var apiResponse = new ApiResponse();
             try
             {
+                var estacionamento = await _estacionamentoRepositorio.GetByIdAsync(id);
+                if (estacionamento == null)
+                {
+                    apiResponse.Erro(new List<string> { "Não encontrado" }, HttpStatusCode.NotFound);
+                    return NotFound(apiResponse);
+                }
 
-                return Ok();
+                apiResponse.Resultado = _mapper.Map<EstacionamentoResponseDTO>(estacionamento);
+                return Ok(apiResponse);
             }
             catch (Exception ex) 
             {
