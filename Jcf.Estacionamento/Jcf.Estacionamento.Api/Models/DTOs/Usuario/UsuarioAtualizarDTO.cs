@@ -11,6 +11,13 @@ namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
         [StringLength(255)]
         public string Nome { get; set; }
 
+        [Required]
+        [StringLength(255)]
+        public string Email { get; set; }
+
+        [Required]
+        public string Role { get; set; } 
+
         public UsuarioAtualizarDTO() 
         {
             Nome = string.Empty;    

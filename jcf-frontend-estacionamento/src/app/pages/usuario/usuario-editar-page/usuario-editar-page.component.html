@@ -1,0 +1,80 @@
+<app-header-default></app-header-default>
+
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/app']">Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/app/usuarios']">Usuários</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            Editar
+        </div>
+        <div class="card-body">
+
+            <form [formGroup]="form">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <input class="form-control"
+                    formControlName="id"                  
+                    type="hidden" />
+
+                    <div class="mb-3 row">
+
+                        <div class="col-md-12">
+                            <label class="col-form-label">Nome</label>
+                            <input class="form-control"
+                                   formControlName="nome"
+                                   [ngClass]="{ 'is-invalid': (!form.controls.nome.valid && !form.controls.nome.pristine) }"
+                                   placeholder="Nome do Usuário" />
+    
+                        </div>                  
+                    </div>
+    
+                    <div class="mb-3 row">
+    
+                        <div class="col-md-8">
+                            <label class="col-form-label">E-Mail</label>
+                            <input class="form-control"
+                                   formControlName="email"     
+                                   type="email"                         
+                                   [ngClass]="{ 'is-invalid': (!form.controls.email.valid && !form.controls.email.pristine) }"
+                                   placeholder="usuario@email.com" />
+    
+                        </div>
+    
+                        <div class="col-md-4">
+                            <label class="col-form-label">Perfil</label>
+                            <select class="form-control"
+                                    formControlName="role">
+                                <option value="BASICO">Básico</option>
+                                <option value="ADMIN">Administrador</option>
+                                }
+                            </select>
+    
+                        </div>
+
+                </div>
+
+                <hr />
+
+                <div class="mb-3 row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" [disabled]="form.invalid" (click)="submit()" >Cadastrar</button>
+                        <button type="button" class="btn btn-warning" [routerLink]="['/app/usuarios']">Cancelar</button>
+                    </div>
+                </div>
+
+                <hr />
+                <p>Obs: os usuários estão sendo salvo com a senha <strong>102030</strong></p>
+                
+            </form>
+        </div>
+    </div>
+</div>

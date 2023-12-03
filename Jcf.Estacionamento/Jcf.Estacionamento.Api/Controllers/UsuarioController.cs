@@ -85,6 +85,12 @@ namespace Jcf.Estacionamento.Api.Controllers
                     return BadRequest(apiResponse);
                 }
 
+                if (!(novo.Role.Equals(RolesConstante.BASICO) || novo.Role.Equals(RolesConstante.ADMIN)))
+                {
+                    apiResponse.Erro(new List<string> { "Perfil de usuário inválido" }, HttpStatusCode.Conflict);
+                    return BadRequest(apiResponse);
+                }
+
                 var usuario = _mapper.Map<Usuario>(novo);
                 usuario.UsuarioCriacaoId = GetUsuarioIdToken();
                 usuario.Senha = SenhaUtil.CriarHashMD5(novo.Senha);
@@ -122,7 +128,21 @@ namespace Jcf.Estacionamento.Api.Controllers
                     return NotFound(apiResponse);
                 }
 
+                if (await _usuarioRepositorio.UserNameEmUsoAsync(updateDTO.Email.ToLower()))
+                {
+                    apiResponse.Erro(new List<string> { "Email já cadastrado!" }, HttpStatusCode.Conflict);
+                    return BadRequest(apiResponse);
+                }
+
+                if (!(updateDTO.Role.Equals(RolesConstante.BASICO) || updateDTO.Role.Equals(RolesConstante.ADMIN)))
+                {
+                    apiResponse.Erro(new List<string> { "Perfil de usuário inválido!" }, HttpStatusCode.Conflict);
+                    return BadRequest(apiResponse);
+                }
+
                 usuario.Nome = updateDTO.Nome;
+                usuario.Email = updateDTO.Email;
+                usuario.Role = updateDTO.Role;
                 usuario.DataAtualizacao = DateTime.UtcNow;
                 usuario.UsuarioAtualizacaoId = GetUsuarioIdToken();
 

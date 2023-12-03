@@ -51,7 +51,8 @@ export class LoginPageComponent implements OnInit {
                                     data.resultado.usuario.nome,
                                     data.resultado.usuario.email, 
                                     null, 
-                                    data.resultado.usuario.primeiroNome),
+                                    data.resultado.usuario.primeiroNome,
+                                    data.resultado.role),
                         data.resultado.token);
         },
         error: (err) => {

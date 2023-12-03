@@ -18,6 +18,10 @@ import { EstacionamentoPageComponent } from './pages/estacionamento/estacionamen
 import { EstacionamentoNovoPageComponent } from './pages/estacionamento/estacionamento-novo-page/estacionamento-novo-page.component';
 import { EstacionamentoDetalharPageComponent } from './pages/estacionamento/estacionamento-detalhar-page/estacionamento-detalhar-page.component';
 import { EstacionamentoEditarPageComponent } from './pages/estacionamento/estacionamento-editar-page/estacionamento-editar-page.component';
+import { UsuarioDetalharPageComponent } from './pages/usuario/usuario-detalhar-page/usuario-detalhar-page.component';
+import { UsuarioEditarPageComponent } from './pages/usuario/usuario-editar-page/usuario-editar-page.component';
+import { UsuarioNovoPageComponent } from './pages/usuario/usuario-novo-page/usuario-novo-page.component';
+import { UsuarioPageComponent } from './pages/usuario/usuario-page/usuario-page.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { EstacionamentoEditarPageComponent } from './pages/estacionamento/estaci
     EstacionamentoPageComponent,
     EstacionamentoNovoPageComponent,
     EstacionamentoDetalharPageComponent,
-    EstacionamentoEditarPageComponent
+    EstacionamentoEditarPageComponent,
+    UsuarioDetalharPageComponent,
+    UsuarioEditarPageComponent,
+    UsuarioNovoPageComponent,
+    UsuarioPageComponent
   ],
   imports: [
     BrowserModule,

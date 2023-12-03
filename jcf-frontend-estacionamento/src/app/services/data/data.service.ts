@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Estacionamento } from "src/app/Models/estacionamento.model";
+import { Usuario } from "src/app/Models/usuario.model";
 import { Apiconfig } from "src/app/Utils/apiconfig";
 import { Security } from "src/app/Utils/security";
 
@@ -43,4 +44,25 @@ export class DataService {
   putEstacionamento(data: any) {
     return this.http.put(`${this.urlApi}/Estacionamento/${data.id}`, data, { headers: this.composeHeaders() });
   }
+
+  getUsuarios() {
+    return this.http.get<Array<Usuario>>(`${this.urlApi}/Usuario`, { headers: this.composeHeaders() });
+  }
+
+  postUsuario(data: any){
+    return this.http.post(`${this.urlApi}/Usuario`, data, { headers: this.composeHeaders() });
+  }
+
+  getUsuario (id: any) {   
+    return this.http.get<Usuario>(`${this.urlApi}/Usuario/${id}`, { headers: this.composeHeaders() });
+  }
+
+  deleteUsuario(id: any){
+    return this.http.delete(`${this.urlApi}/Usuario/${id}`, { headers: this.composeHeaders() });
+  }
+
+  putUsuario(data: any) {
+    return this.http.put(`${this.urlApi}/Usuario/${data.id}`, data, { headers: this.composeHeaders() });
+  }
+
 }

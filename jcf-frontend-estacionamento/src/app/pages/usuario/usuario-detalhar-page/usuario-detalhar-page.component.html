@@ -1,0 +1,60 @@
+<app-header-default></app-header-default>
+
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/app']">Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/app/usuarios']">Usuarios</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Detalhar</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            Detalhe
+        </div>
+        <div class="card-body">
+
+            <div class="mb-3 row">
+
+                <div class="col-md-6">
+                    <strong>Id: </strong> {{ usuario?.id }}
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Nome: </strong> {{ usuario?.nome }}
+                </div>
+
+            </div>
+
+            <div class="mb-3 row">
+
+                <div class="col-md-6">
+                    <strong>Total de Vagas para Motos: </strong> {{ usuario?.email }}
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Total de Vagas para Carros: </strong> {{ usuario?.role }}
+                </div>
+             
+            </div>
+
+            <hr />
+
+            <div class="mb-3 row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" [routerLink]="['/app/usuarios/editar', usuario?.id ]">Editar</button>
+                    <button type="button" class="btn btn-danger" (click)="delete(usuario?.id)">Deletar</button>
+                    <button type="button" class="btn btn-warning" [routerLink]="['/app/usuarios']">Cancelar</button>
+                </div>
+            </div>
+
+            <hr />
+            <p>Obs0: apenas usuários admins consegue remover um item.</p>
+            <p>Obs1: o botão de Deletar não tem confirmação da ação, se clicar nele, vai remover o registro! Não foi inserido uma confirmação</p>
+        </div>
+    </div>
+</div>

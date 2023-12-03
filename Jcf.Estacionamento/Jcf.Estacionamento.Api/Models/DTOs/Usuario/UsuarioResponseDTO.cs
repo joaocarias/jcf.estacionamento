@@ -10,6 +10,8 @@ namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
 
         public string Email { get; set; }
 
+        public string Role { get; set; }
+
         public string PrimeiroNome
         {
             get
@@ -22,6 +24,7 @@ namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
         {
             Nome = string.Empty;
             Email = string.Empty;
+            Role = string.Empty;
         }
     }
 }

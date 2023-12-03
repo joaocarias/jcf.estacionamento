@@ -12,9 +12,10 @@ namespace Jcf.Estacionamento.Api.Models.DTOs.Usuario
         [StringLength(255)]
         public string Email { get; set; }
 
-        [Required]
         [StringLength(255)]
-        public string Senha { get; set; }
+        public string Senha { get; set; } = "102030";
+
+        public string Role { get; set; } = "BASICO";
 
         public UsuarioDTO()
         { 
