@@ -1,0 +1,85 @@
+<app-header-default></app-header-default>
+
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/app']">Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/app/estacionamentos/']">Estacionamento</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            Editar
+        </div>
+        <div class="card-body">
+
+            <form [formGroup]="form">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <input class="form-control"
+                    formControlName="id"                  
+                    type="hidden" />
+
+                <div class="mb-3 row">
+
+                    <div class="col-md-12">
+                        <label class="col-form-label">Nome</label>
+                        <input class="form-control"
+                               formControlName="nome"
+                               [ngClass]="{ 'is-invalid': (!form.controls.nome.valid && !form.controls.nome.pristine) }"
+                               placeholder="Nome do Estacionamento" />
+
+                    </div>                  
+                </div>
+
+                <div class="mb-3 row">
+
+                    <div class="col-md-3">
+                        <label class="col-form-label">Vagas para Motos</label>
+                        <input class="form-control"
+                               formControlName="totalVagasMoto"
+                               type="number"
+                               [ngClass]="{ 'is-invalid': (!form.controls.totalVagasMoto.valid && !form.controls.totalVagasMoto.pristine) }"
+                               placeholder="99" />
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="col-form-label">Vagas para Carros</label>
+                        <input class="form-control"
+                               formControlName="totalVagasCarro"
+                               type="number"
+                               [ngClass]="{ 'is-invalid': (!form.controls.totalVagasCarro.valid && !form.controls.totalVagasCarro.pristine) }"
+                               placeholder="99" />
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="col-form-label">Vagas Grandes</label>
+                        <input class="form-control"
+                               formControlName="totalVagasGrandes"
+                               type="number"
+                               [ngClass]="{ 'is-invalid': (!form.controls.totalVagasGrandes.valid && !form.controls.totalVagasGrandes.pristine) }"
+                               placeholder="99" />
+
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="mb-3 row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" [disabled]="form.invalid" (click)="submit()" >Cadastrar</button>
+                        <button type="button" class="btn btn-warning" [routerLink]="['/app/estacionamentos']">Cancelar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

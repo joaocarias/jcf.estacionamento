@@ -2,18 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, timer } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import { Apiconfig } from 'src/app/Utils/apiconfig';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionService {
-  private apiUrl = 'https://localhost:7020';  
+  private apiUrl = Apiconfig.getApiUrl();
 
   constructor(private http: HttpClient) { }
-
-    apiUrlDefault(): string {
-        return this.apiUrl;
-    }
 
   testConnection(): Observable<boolean> {
     const testUrl = `${this.apiUrl}/api/Home/TestarConexao`;  

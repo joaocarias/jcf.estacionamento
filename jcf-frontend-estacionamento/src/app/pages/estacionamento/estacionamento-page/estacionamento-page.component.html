@@ -1,0 +1,53 @@
+<app-header-default></app-header-default>
+
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/app']">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Estacionamento</li>
+        </ol>
+    </nav>
+
+    
+    <div class="card">
+        <div class="card-header">
+            Lista Cadastrados
+        </div>
+        <div class="card-body">
+
+            <button type="button" class="btn btn-primary" [routerLink]="['/app/estacionamentos/novo']">Cadastrar Novo</button>
+
+            <table class="table table-striped table-hover "
+                   *ngIf="estacionamentos && estacionamentos.length > 0; else NoMessage">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Nº vagas Motos</th>
+                        <th scope="col">Nº vagas Carros</th>
+                        <th scope="col">Nº vagas Grandes</th>                        
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let linha of estacionamentos">
+                        <th scope="row">{{ linha.nome }}</th>
+                        <td> {{ linha.totalVagasMoto }} </td>
+                        <td> {{ linha.totalVagasCarro }}</td>
+                        <td> {{ linha.totalVagasGrandes }}</td>
+
+                        <td> <a [routerLink]="['/app/estacionamentos', linha.id ]">Detalhar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ng-template #NoMessage>
+                <div class="alert alert-warning mt-3" role="alert">
+                    Não há cadastrados.
+                </div>
+            </ng-template>
+        </div>
+   
+</div>

@@ -8,21 +8,42 @@ import { HeaderDefaultComponent } from './components/shared/header-default/heade
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConnectionService } from './services/connection/connection.service';
+import { LoginPageComponent } from './pages/account/login-page/login-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppHomePageComponent } from './pages/app-home/app-home-page/app-home-page.component';
+import { AuthService } from './services/account/auth.service';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { EstacionamentoMsgNovoComponent } from './pages/estacionamento/estacionamento-msg-novo/estacionamento-msg-novo.component';
+import { EstacionamentoPageComponent } from './pages/estacionamento/estacionamento-page/estacionamento-page.component';
+import { EstacionamentoNovoPageComponent } from './pages/estacionamento/estacionamento-novo-page/estacionamento-novo-page.component';
+import { EstacionamentoDetalharPageComponent } from './pages/estacionamento/estacionamento-detalhar-page/estacionamento-detalhar-page.component';
+import { EstacionamentoEditarPageComponent } from './pages/estacionamento/estacionamento-editar-page/estacionamento-editar-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     HeaderDefaultComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    LoginPageComponent,
+    AppHomePageComponent,
+    NavbarComponent,
+    EstacionamentoMsgNovoComponent,
+    EstacionamentoPageComponent,
+    EstacionamentoNovoPageComponent,
+    EstacionamentoDetalharPageComponent,
+    EstacionamentoEditarPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
-    ConnectionService
+    ConnectionService,
+    AuthService 
   ],
   bootstrap: [AppComponent]
 })

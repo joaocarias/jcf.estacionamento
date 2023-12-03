@@ -1,0 +1,78 @@
+<app-header-default></app-header-default>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Login</div>
+
+                <div class="card-body">
+
+                    <div *ngIf="messageError" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ messageError }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <form [formGroup]="form">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="mb-3 row">
+                            <label class="col-md-4 col-form-label text-md-right">E-mail</label>
+                            <div class="col-md-6">
+                                <input class="form-control"
+                                       formControlName="username"
+                                       [ngClass]="{ 'is-invalid': (!form.controls.username.valid && !form.controls.username.pristine) }"
+                                       placeholder="usuario@email.com" 
+                                       type="email" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-md-4 col-form-label text-md-right">Senha</label>
+                            <div class="col-md-6">
+                                <input class="form-control"
+                                       formControlName="senha"
+                                       [ngClass]="{ 'is-invalid': (!form.controls.senha.valid && !form.controls.senha.pristine) }"
+                                       placeholder="********"
+                                       type="password" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary"
+                                        [disabled]="form.invalid" (click)="submit()">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr />
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="alert alert-info" role="alert">
+                                Existe dois usuários pré-cadastrado, são eles:
+                                <ul>
+                                    <li>
+                                        usuario: <strong>basico@email.com</strong> e senha: <strong>102030</strong>, este com permissões de <strong>Usuário Básico</strong>.
+                                    </li>
+                                    <li>
+                                        usuario: <strong>admin@email.com</strong> e senha: <strong>102030</strong>, este com permissões de <strong>Usuário Administrador</strong>.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
