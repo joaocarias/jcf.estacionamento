@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "c21d0f75-dec0-4941-8990-acfd041928c3",
+		"name": "ApiEstacionamento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6329185"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/:id",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "08dbd59a-2683-4c67-8e16-689ba2648545"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Listar",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario",
+								"Listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"admin@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario",
+								"Login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Novo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Joao Carias de Franca\",\r\n  \"email\": \"jfranca1827@gmail.com\",\r\n  \"senha\": \"102030\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"08dbf279-cadf-435d-89d1-689173071854\",\r\n  \"nome\": \"Antonia França\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario?id=08dbf279-cadf-435d-89d1-689173071854",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "08dbf279-cadf-435d-89d1-689173071854"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remover",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario?id=08dbf27a-cbf1-4f19-879a-9fa1940da33d",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "08dbf27a-cbf1-4f19-879a-9fa1940da33d"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Estacionamento",
+			"item": [
+				{
+					"name": "Get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario?id=08dbd59a-2683-4c67-8e16-689ba2648545",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "08dbd59a-2683-4c67-8e16-689ba2648545"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Listar",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario",
+								"Listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Joao Carias de Franca\",\r\n  \"email\": \"jfranca1827@gmail.com\",\r\n  \"senha\": \"102030\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"08dbf279-cadf-435d-89d1-689173071854\",\r\n  \"nome\": \"Antonia França\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario?id=08dbf279-cadf-435d-89d1-689173071854",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "08dbf279-cadf-435d-89d1-689173071854"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Remover",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario?id=08dbf27a-cbf1-4f19-879a-9fa1940da33d",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"Usuario"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "08dbf27a-cbf1-4f19-879a-9fa1940da33d"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Basico",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userName\": \"basico@email.com\",\r\n  \"senha\": \"102030\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocolo}}://{{host}}:{{porta}}/api/Usuario/Login",
+									"protocol": "{{protocolo}}",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{porta}}",
+									"path": [
+										"api",
+										"Usuario",
+										"Login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EstacionamentoVeiculo",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/EstacionamentoVeiculo/:id",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"EstacionamentoVeiculo",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Estacionar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"estacionamentoId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"veiculoTipo\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocolo}}://{{host}}:{{porta}}/api/EstacionamentoVeiculo/Estacionar",
+							"protocol": "{{protocolo}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{porta}}",
+							"path": [
+								"api",
+								"EstacionamentoVeiculo",
+								"Estacionar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSX0lEIjoiMDhkYmQ1OWEtMjY4My00YzY3LThlMTYtNjg5YmEyNjQ4NTQ1IiwidW5pcXVlX25hbWUiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJVU0VSX05BTUUiOiJBZG1pbmlzdHJhZG9yIFVzdcOhcmlvIiwibmJmIjoxNzAxNTIwOTUwLCJleHAiOjE3MDE1NDk3NTAsImlhdCI6MTcwMTUyMDk1MCwiaXNzIjoiQXBpRXN0YWNpb25hbWVudG8iLCJhdWQiOiJBcGlFc3RhY2lvbmFtZW50byJ9.YDpxMlIi9XrAN_BcRJK0EwMCoB6-Ho0cqLyOL_Y8bDA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "protocolo",
+			"value": "https",
+			"type": "string"
+		},
+		{
+			"key": "porta",
+			"value": "7020",
+			"type": "string"
+		}
+	]
+}
