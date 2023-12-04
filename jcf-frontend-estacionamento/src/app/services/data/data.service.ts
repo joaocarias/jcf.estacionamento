@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Estacionamento } from "src/app/Models/estacionamento.model";
+import { EstacionamentoVeiculo } from "src/app/Models/estacionamentoVeiculo";
 import { Usuario } from "src/app/Models/usuario.model";
 import { Apiconfig } from "src/app/Utils/apiconfig";
 import { Security } from "src/app/Utils/security";
@@ -72,5 +73,9 @@ export class DataService {
 
   deleteRemoverEstacionar(id: any) {
     return this.http.delete(`${this.urlApi}/EstacionamentoVeiculo/Remover/${id}`, { headers: this.composeHeaders() });
+  }
+
+  getEstacionamentoVeiculo (id: any) {   
+    return this.http.get<EstacionamentoVeiculo>(`${this.urlApi}/EstacionamentoVeiculo/${id}`, { headers: this.composeHeaders() });
   }
 }

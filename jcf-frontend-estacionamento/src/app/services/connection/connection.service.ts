@@ -13,7 +13,7 @@ export class ConnectionService {
   constructor(private http: HttpClient) { }
 
   testConnection(): Observable<boolean> {
-    const testUrl = `${this.apiUrl}/api/Home/TestarConexao`;  
+    const testUrl = `${this.apiUrl}/api/Estacionamento/TestarConexao`;  
 
     return this.http.get(testUrl).pipe(
       map(() => true),

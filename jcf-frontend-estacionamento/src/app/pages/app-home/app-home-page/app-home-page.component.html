@@ -68,18 +68,6 @@
                     </div>
                 </div>
 
-                <div class="mb-3 row">    
-                    <div class="col-md-4">
-                        <strong>Vagas para Motos disponíveis: </strong> {{ estacionamento?.vagasDisponiveisMoto }}
-                    </div>    
-                    <div class="col-md-4">
-                        <strong>Vagas para Carros disponíveis: </strong> {{ estacionamento?.vagasDisponiveisCarro }}
-                    </div>    
-                    <div class="col-md-4">
-                        <strong>Vagas Grandes disponíveis: </strong> {{ estacionamento?.vagasDisponiveisGrandes }}
-                    </div>
-                </div>
-
                  <div class="mb-3 row">
                     <div class="col-md-4">
                         <strong>Total de Vagas: </strong> {{ estacionamento?.totaisVagas }}
@@ -101,32 +89,114 @@
                     <button type="button" class="btn btn-info" (click)="estacionarVan()">Estacionar Van</button> 
                 </div>  
                 
-                
                 <div *ngIf="messageError" class="alert alert-warning alert-dismissible fade show m-3" role="alert">
                     {{ messageError }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 
+                <div *ngIf="messageSuccess" class="alert alert-info alert-dismissible fade show m-3" role="alert">
+                    {{ messageSuccess }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
 
                 <hr />
 
                 <div>
                 <h4>Vagas para Motos: <small class="text-body-secondary"> Tem disponível <strong> {{ estacionamento.vagasDisponiveisMoto }} </strong> para este tipo de vaga.</small></h4>
-                
-                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasMotos" ></app-veiculo-tabela-page>
-        
+
+                <!-- <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasMotos" ></app-veiculo-tabela-page>
+         -->
+         
+         <table class="table table-striped table-hover table-sm"
+         *ngIf="vagasMotos && vagasMotos.length > 0; else SemVeiculoMotos">
+         <thead>
+             <tr>
+                 <th scope="col">Id</th>
+                 <th scope="col">Placa</th>
+                 <th scope="col">Tipo</th>
+                 <th scope="col"></th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr *ngFor="let linha of vagasMotos">
+                 <th scope="row">{{ linha.id }}</th>
+                 <td> {{ linha.veiculo?.placa }} </td>
+                 <td [innerHTML]="obterTipoVeiculo(linha.veiculo?.tipo)"></td>
+                 <td> <button type="button" class="btn btn-dark" (click)="liberarMoto(linha.id)">Liberar Vaga</button></td>
+             </tr>
+         </tbody>
+     </table>
+
+     <ng-template #SemVeiculoMotos>
+         <div class="alert alert-success mt-3" role="alert">
+         Todas as vagas estão disponíveis para este tipo.
+         </div>
+     </ng-template>
+
             <hr />
     
                 <h4>Vagas para Carros: <small class="text-body-secondary"> Tem disponível <strong> {{ estacionamento.vagasDisponiveisCarro }} </strong> para este tipo de vaga.</small> </h4>
-                
-                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasCarros"></app-veiculo-tabela-page>
+<!--                 
+                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasCarros"></app-veiculo-tabela-page> -->
+
+                <table class="table table-striped table-hover "
+                    *ngIf="vagasCarros && vagasCarros.length > 0; else SemVeiculoCarro">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let linha of vagasCarros">
+                            <th scope="row">{{ linha.id }}</th>
+                            <td> {{ linha.veiculo?.placa }} </td>
+                            <td [innerHTML]="obterTipoVeiculo(linha.veiculo?.tipo)"></td>
+                            <td> <button type="button" class="btn btn-dark" (click)="liberarCarro(linha.id)">Liberar Vaga</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <ng-template #SemVeiculoCarro>
+                    <div class="alert alert-success mt-3" role="alert">
+                    Todas as vagas estão disponíveis para este tipo.
+                    </div>
+                </ng-template>
            
             <hr />
     
                 <h4>Vagas Grandes: <small class="text-body-secondary"> Tem disponível <strong> {{ estacionamento.vagasDisponiveisGrandes }} </strong> para este tipo de vaga.</small> </h4>
                 
-                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasGrandes"></app-veiculo-tabela-page>
+                <!-- <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasGrandes"></app-veiculo-tabela-page> -->
+                
+                <table class="table table-striped table-hover "
+                    *ngIf="vagasGrandes && vagasGrandes.length > 0; else SemVeiculoVan">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let linha of vagasGrandes">
+                            <th scope="row">{{ linha.id }}</th>
+                            <td> {{ linha.veiculo?.placa }} </td>
+                            <td [innerHTML]="obterTipoVeiculo(linha.veiculo?.tipo)"></td>
+                            <td> <button type="button" class="btn btn-dark" (click)="liberarVan(linha.id)">Liberar Vaga</button></td>
+                        </tr>
+                    </tbody>
+                </table>
 
+                <ng-template #SemVeiculoVan>
+                    <div class="alert alert-success mt-3" role="alert">
+                    Todas as vagas estão disponíveis para este tipo.
+                    </div>
+                </ng-template>
+           
             </div>
 
             </div>

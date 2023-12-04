@@ -162,6 +162,15 @@ namespace Jcf.Estacionamento.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("TestarConexao")]
+        [AllowAnonymous]
+        public IActionResult GetTeste()
+        {
+            return Ok();
+        }
+             
+
         #endregion
     }
 }

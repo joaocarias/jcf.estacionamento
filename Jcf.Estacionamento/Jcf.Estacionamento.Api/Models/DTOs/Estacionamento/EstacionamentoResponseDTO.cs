@@ -15,14 +15,9 @@ namespace Jcf.Estacionamento.Api.Models.DTOs.Estacionamento
         public int TotalVagasCarro { get; set; }
         public int TotalVagasGrandes { get; set; } 
 
-        public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasMotoPreenchidas =>
-            VagasPreenchidas.Where(x => x.Tipo.Equals(EVeiculoTipo.Moto));
-
-        public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasCarroPreenchidas =>
-            VagasPreenchidas.Where(x => x.Tipo.Equals(EVeiculoTipo.Carro));
-
-        public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasGrandePreenchidas =>
-            VagasPreenchidas.Where(x => x.Tipo.Equals(EVeiculoTipo.Van));
+        public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasMotoPreenchidas { get; set; }
+        public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasCarroPreenchidas { get; set; }
+        public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasGrandePreenchidas { get; set; }
 
         public IEnumerable<EstacionamentoVeiculoResponseDTO> VagasPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculoResponseDTO>();
 
