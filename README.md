@@ -36,7 +36,7 @@ O frontend foi desenvolvido em Angular Framework utilizando a versão 16.2.0.
 
 ```
 cd jcf.estacionamento/
-dotnet run --project Jcf.Estacionamento/Jcf.Estacionamento.Api/
+dotnet run --project /Jcf.Estacionamento/Jcf.Estacionamento.Api/
 
 ```
 
