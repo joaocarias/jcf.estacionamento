@@ -10,6 +10,143 @@
         </ol>
     </nav>
 
-    <app-estacionamento-msg-novo></app-estacionamento-msg-novo>
+    <div *ngIf="estacionamentos && estacionamentos.length > 0; else NoMessage"> 
+        
+        <!-- <div *ngIf="estacionamentos && estacionamentos.length == 1; else MaisDeUmEstacionamento">
+            <div class="alert alert-primary" role="alert">
+                Você Possui 1 Estacionamento cadastrado.
+            </div>
+            
+        </div> -->
+         
+        <!-- <ng-template #MaisDeUmEstacionamento>
+            <div class="alert alert-primary" role="alert">
+                Você Possui {{ estacionamentos.length }} Estacionamento cadastrado.
+            </div>
 
+            <div class="card">
+                <div class="card-body">
+            
+                    <select [(ngModel)]="selectedEstacionamento" (ngModelChange)="estacionamentoDados()">
+                        <option *ngFor="let item of estacionamentos" [value]="item.id">
+                          {{ item.nome }}
+                        </option>
+                      </select>
+
+                </div>
+            </div>
+        </ng-template> -->
+        
+        <div class="card" *ngIf="estacionamento; else SelecionarEstacionamento">
+            <div class="card-header text-center">
+              <h3>{{ estacionamento.nome }}</h3>
+            </div>
+  
+            <div class="card-body">
+                             
+                <div class="mb-3 row">    
+                    <div class="col-md-4">
+                        <strong>Total de Vagas para Motos: </strong> {{ estacionamento?.totalVagasMoto }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Total de Vagas para Carros: </strong> {{ estacionamento?.totalVagasCarro }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Total de Vagas Grandes: </strong> {{ estacionamento?.totalVagasGrandes }}
+                    </div>
+                </div>
+
+                <div class="mb-3 row">    
+                    <div class="col-md-4">
+                        <strong>Vagas para Motos disponíveis: </strong> {{ estacionamento?.vagasDisponiveisMoto }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Vagas para Carros disponíveis: </strong> {{ estacionamento?.vagasDisponiveisCarro }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Vagas Grandes disponíveis: </strong> {{ estacionamento?.vagasDisponiveisGrandes }}
+                    </div>
+                </div>
+
+                <div class="mb-3 row">    
+                    <div class="col-md-4">
+                        <strong>Vagas para Motos disponíveis: </strong> {{ estacionamento?.vagasDisponiveisMoto }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Vagas para Carros disponíveis: </strong> {{ estacionamento?.vagasDisponiveisCarro }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Vagas Grandes disponíveis: </strong> {{ estacionamento?.vagasDisponiveisGrandes }}
+                    </div>
+                </div>
+
+                 <div class="mb-3 row">
+                    <div class="col-md-4">
+                        <strong>Total de Vagas: </strong> {{ estacionamento?.totaisVagas }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Vagas disponíveis: </strong> {{ estacionamento?.totalVagasDispniveis }}
+                    </div>    
+                    <div class="col-md-4">
+                        <strong>Vagas Ocupadas: </strong> {{ estacionamento?.totaisVagas - estacionamento?.totalVagasDispniveis }}
+                    </div>    
+                    
+                </div>
+
+                <hr />
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" (click)="estacionarMoto()">Estacionar Moto</button> 
+                    <button type="button" class="btn btn-success" (click)="estacionarCarro()">Estacionar Carro</button> 
+                    <button type="button" class="btn btn-info" (click)="estacionarVan()">Estacionar Van</button> 
+                </div>  
+                
+                
+                <div *ngIf="messageError" class="alert alert-warning alert-dismissible fade show m-3" role="alert">
+                    {{ messageError }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+
+                <hr />
+
+                <div>
+                <h4>Vagas para Motos: <small class="text-body-secondary"> Tem disponível <strong> {{ estacionamento.vagasDisponiveisMoto }} </strong> para este tipo de vaga.</small></h4>
+                
+                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasMotos" ></app-veiculo-tabela-page>
+        
+            <hr />
+    
+                <h4>Vagas para Carros: <small class="text-body-secondary"> Tem disponível <strong> {{ estacionamento.vagasDisponiveisCarro }} </strong> para este tipo de vaga.</small> </h4>
+                
+                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasCarros"></app-veiculo-tabela-page>
+           
+            <hr />
+    
+                <h4>Vagas Grandes: <small class="text-body-secondary"> Tem disponível <strong> {{ estacionamento.vagasDisponiveisGrandes }} </strong> para este tipo de vaga.</small> </h4>
+                
+                <app-veiculo-tabela-page [vagasOcupadasVeiculos]="vagasGrandes"></app-veiculo-tabela-page>
+
+            </div>
+
+            </div>
+    
+            <div class="card-footer text-body-secondary">
+              <ul>
+                <li>Nas vagas de moto só é possível estacionar Moto</li>
+              </ul>
+            </div>
+          </div>
+
+          <ng-template #SelecionarEstacionamento>
+            <div class="alert alert-primary" role="alert">
+                Selecione um Estacionamento.
+            </div>
+        </ng-template>
+
+    </div>
+
+    <ng-template #NoMessage>
+        <app-estacionamento-msg-novo></app-estacionamento-msg-novo>
+    </ng-template>
 </div>

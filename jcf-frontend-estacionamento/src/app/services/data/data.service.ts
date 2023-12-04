@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Estacionamento } from "src/app/Models/estacionamento.model";
 import { Usuario } from "src/app/Models/usuario.model";
 import { Apiconfig } from "src/app/Utils/apiconfig";
@@ -25,7 +26,7 @@ export class DataService {
     return this.http.post(`${this.urlApi}/Usuario/Login`, data);
   }
 
-  getEstacionamentos() {
+  getEstacionamentos() : Observable<Array<Estacionamento>> {
     return this.http.get<Array<Estacionamento>>(`${this.urlApi}/Estacionamento`, { headers: this.composeHeaders() });
   }
 
@@ -65,4 +66,11 @@ export class DataService {
     return this.http.put(`${this.urlApi}/Usuario/${data.id}`, data, { headers: this.composeHeaders() });
   }
 
+  postEstacionar(data: any){
+    return this.http.post(`${this.urlApi}/EstacionamentoVeiculo/Estacionar`, data, { headers: this.composeHeaders() });
+  }
+
+  deleteRemoverEstacionar(id: any) {
+    return this.http.delete(`${this.urlApi}/EstacionamentoVeiculo/Remover/${id}`, { headers: this.composeHeaders() });
+  }
 }

@@ -22,6 +22,7 @@ import { UsuarioDetalharPageComponent } from './pages/usuario/usuario-detalhar-p
 import { UsuarioEditarPageComponent } from './pages/usuario/usuario-editar-page/usuario-editar-page.component';
 import { UsuarioNovoPageComponent } from './pages/usuario/usuario-novo-page/usuario-novo-page.component';
 import { UsuarioPageComponent } from './pages/usuario/usuario-page/usuario-page.component';
+import { VeiculoTabelaComponent } from './pages/veiculo/veiculo-tabela/veiculo-tabela.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UsuarioPageComponent } from './pages/usuario/usuario-page/usuario-page.
     UsuarioDetalharPageComponent,
     UsuarioEditarPageComponent,
     UsuarioNovoPageComponent,
-    UsuarioPageComponent
+    UsuarioPageComponent,
+    VeiculoTabelaComponent
   ],
   imports: [
     BrowserModule,

@@ -47,14 +47,12 @@
             <div class="mb-3 row">
                 <div class="col-md-12">
                     <button type="button" class="btn btn-primary" [routerLink]="['/app/estacionamentos/editar', estacionamento?.id ]">Editar</button>
-                    <button type="button" class="btn btn-danger" (click)="delete(estacionamento?.id)">Deletar</button>
                     <button type="button" class="btn btn-warning" [routerLink]="['/app/estacionamentos']">Cancelar</button>
                 </div>
             </div>
 
             <hr />
             <p>Obs0: apenas usuários admins consegue remover um item.</p>
-            <p>Obs1: o botão de Deletar não tem confirmação da ação, se clicar nele, vai remover o registro! Não foi inserido uma confirmação</p>
         </div>
     </div>
 </div>

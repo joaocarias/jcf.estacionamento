@@ -48,7 +48,7 @@ export class UsuarioNovoPageComponent implements OnInit {
         .postUsuario(this.form.value)
           .subscribe({
             next: (data: any) => {
-              console.log(data);
+            //  console.log(data);
               this.router.navigate(['/app/usuarios']);
             },
             error: (err) => {

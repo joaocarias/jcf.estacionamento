@@ -57,7 +57,7 @@ export class LoginPageComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          this.messageError = err.error.message;
+          this.messageError = err.error.erroMensagens.map(erro => `-> ${erro.mensagem}`).join('\n');
           Security.clear();
         }
       });      

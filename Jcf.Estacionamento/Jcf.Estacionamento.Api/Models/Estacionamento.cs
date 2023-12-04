@@ -71,5 +71,14 @@ namespace Jcf.Estacionamento.Api.Models
             TotalVagasCarro = totalVagasCarro;
             TotalVagasGrandes = totalVagasGrandes;
         }
+
+        public Estacionamento(Guid id, string nome, int totalVagasMoto, int totalVagasCarro, int totalVagasGrandes, Guid? usuarioCriacaoId = null) : base(usuarioCriacaoId)
+        {
+            Id = id;
+            Nome = nome;
+            TotalVagasMoto = totalVagasMoto;
+            TotalVagasCarro = totalVagasCarro;
+            TotalVagasGrandes = totalVagasGrandes;
+        }
     }
 }

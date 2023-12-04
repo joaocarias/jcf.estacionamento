@@ -26,6 +26,17 @@ namespace Jcf.Estacionamento.Api.Extensoes
                         RolesConstante.BASICO
                     )
                 );
+
+            modelBuilder.Entity<Models.Estacionamento>().HasData(
+                    new Models.Estacionamento
+                    (
+                        Guid.Parse("08dbe21f-7354-4a2a-8b53-63cc10662e98"),
+                        "Estacionamento Principal",
+                        30,
+                        10,
+                        3
+                    )
+                );
         }
     }
 }

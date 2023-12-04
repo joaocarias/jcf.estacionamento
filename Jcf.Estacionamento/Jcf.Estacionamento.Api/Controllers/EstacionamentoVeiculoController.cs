@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
+using Jcf.Estacionamento.Api.Enums;
 using Jcf.Estacionamento.Api.Extensoes;
 using Jcf.Estacionamento.Api.Models;
 using Jcf.Estacionamento.Api.Models.DTOs.EstacionamentoVeiculo;
 using Jcf.Estacionamento.Api.Models.Records.EstacionamentoVeiculo;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace Jcf.Estacionamento.Api.Controllers
@@ -35,6 +37,12 @@ namespace Jcf.Estacionamento.Api.Controllers
             var apiResponse = new ApiResponse();
             try
             {
+                if (estacionar.VeiculoTipo.Equals(EVeiculoTipo.Desconhecido))
+                {
+                    apiResponse.Erro(new List<string> { "Tipo de Veiculo não reconhecido!" }, HttpStatusCode.NotFound);
+                    return NotFound(apiResponse);
+                }
+
                 var veiculo = new Veiculo(estacionar.VeiculoTipo, GetUsuarioIdToken());
                 
                 var estacionamento = await _estacionamentoRepositorio.GetByIdAsync(estacionar.EstacionamentoId);
@@ -86,6 +94,32 @@ namespace Jcf.Estacionamento.Api.Controllers
 
                 apiResponse.Resultado = _mapper.Map<EstacionamentoVeiculoResponseDTO>(estacionamentoVeiculo);
                 return Ok(apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                apiResponse.Erro(new List<string> { ex.Message });
+                return BadRequest(apiResponse);
+            }
+        }
+
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> Remover([Required] Guid id)
+        {
+            var apiResponse = new ApiResponse();
+            try
+            {
+                var estacionamentoVeiculo = await _estacionamentoVeiculoRepositorio.GetByIdAsync(id);
+                if (estacionamentoVeiculo is null)
+                {
+                    apiResponse.Erro(new List<string> { "Não encontrado!" }, HttpStatusCode.NotFound);
+                    return NotFound(apiResponse);
+                }
+
+                estacionamentoVeiculo.Remover(GetUsuarioIdToken());
+                var retorno = _estacionamentoVeiculoRepositorio.Delete(estacionamentoVeiculo);
+                return NoContent();
             }
             catch (Exception ex)
             {
