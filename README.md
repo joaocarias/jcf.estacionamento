@@ -44,6 +44,24 @@ A base de dados é criado via migration, quando executar a aplicação o banco �
 
 Logo após de complilado e executado, acesse o swagger, como exemplo [no link](https://localhost:7020/swagger/index.html):  
 
+
+Para o frontend certifique-se de ter o Node.js e o Angular CLI instalados globalmente.
+
+Para instalar o Angualar CLI:
+
+```
+npm install -g @angular/cli
+```
+
+Agora na pasta do projeto: jcf-frontend-estacionamento execute: 
+
+```
+ng serve -o
+```
+
+O comando acima inicia o servidor de desenvolvimento e, por padrão, o aplicativo estará disponível em http://localhost:4200/.
+
+
 ## Coleção do Postman
 
 Segue o link: [coleção](/temp/ApiEstacionamento.postman_collection.json)
