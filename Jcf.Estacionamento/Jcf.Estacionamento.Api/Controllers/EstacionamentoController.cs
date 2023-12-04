@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Jcf.Estacionamento.Api.Data.Repositorios.IRepositorios;
+using Jcf.Estacionamento.Api.Extensoes;
 using Jcf.Estacionamento.Api.Models;
 using Jcf.Estacionamento.Api.Models.DTOs.Estacionamento;
 using Jcf.Estacionamento.Api.Models.Records.Estacionamento;
@@ -106,6 +107,13 @@ namespace Jcf.Estacionamento.Api.Controllers
                 if (estacionamento is null)
                 {
                     apiResponse.Erro(new List<string> { "Não encontrado!" }, HttpStatusCode.NotFound);
+                    return NotFound(apiResponse);
+                }
+
+                var permiteAtualizar = estacionamento.PermiteAtualizar(update);
+                if (!permiteAtualizar.permite)
+                {
+                    apiResponse.Erro(new List<string> { permiteAtualizar.mensagem }, HttpStatusCode.NotFound);
                     return NotFound(apiResponse);
                 }
 

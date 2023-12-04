@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Jcf.Estacionamento.Api.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jcf.Estacionamento.Api.Models
 {
@@ -17,47 +19,20 @@ namespace Jcf.Estacionamento.Api.Models
         [Required]
         public int TotalVagasGrandes { get; set; } = 0;
 
-        public IEnumerable<EstacionamentoVeiculo>? VagasPreenchidas { get; set; }
+        public IEnumerable<EstacionamentoVeiculo> VagasPreenchidas { get; set; }
+            = Enumerable.Empty<EstacionamentoVeiculo>();
 
+        [NotMapped]
+        public IEnumerable<EstacionamentoVeiculo> VagasMotoPreenchidas =>
+            VagasPreenchidas.Where(x => x.Tipo.Equals(EVeiculoTipo.Moto));
 
-        //public IEnumerable<EstacionamentoVeiculo> VagasMotoPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculo>();
-        //public IEnumerable<EstacionamentoVeiculo> VagasCarroPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculo>();
-        //public IEnumerable<EstacionamentoVeiculo> VagasGrandesPreenchidas { get; set; } = Enumerable.Empty<EstacionamentoVeiculo>();
-        
-        //public IEnumerable<Veiculo> MotosEstacionadas
-        //{
-        //    get
-        //    {
-        //        var motos = new List<Veiculo>();
-        //        motos.AddRange(VagasMotoPreenchidas.Where(x => x.Veiculo.VeiculoTipo.Equals(EVeiculoTipo.Moto)).ToList());
-        //        motos.AddRange(VagasCarroPreenchidas.Where(x => x.Veiculo.VeiculoTipo.Equals(EVeiculoTipo.Moto)).ToList());
-        //        motos.AddRange(VagasGrandesPreenchidas.Where(x => x.Veiculo.VeiculoTipo.Equals(EVeiculoTipo.Moto)).ToList());
+        [NotMapped]
+        public IEnumerable<EstacionamentoVeiculo> VagasCarroPreenchidas =>
+            VagasPreenchidas.Where(x => x.Tipo.Equals(EVeiculoTipo.Carro));
 
-        //        return motos;
-        //    }
-        //}
-        //public IEnumerable<Veiculo> CarrosEstacionados
-        //{
-        //    get
-        //    {
-        //        var carros = new List<Veiculo>();                
-        //        carros.AddRange(VagasCarroPreenchidas.Where(x => x.VeiculoTipo.Equals(EVeiculoTipo.Carro)).ToList());
-        //        carros.AddRange(VagasGrandesPreenchidas.Where(x => x.VeiculoTipo.Equals(EVeiculoTipo.Carro)).ToList());
-
-        //        return carros;
-        //    }
-        //}
-        //public IEnumerable<Veiculo> VansEstacionadas
-        //{
-        //    get
-        //    {
-        //        var vans = new List<Veiculo>();
-        //        vans.AddRange(VagasCarroPreenchidas.Where(x => x.VeiculoTipo.Equals(EVeiculoTipo.Van)).DistinctBy(x => x.Placa).ToList());               
-        //        vans.AddRange(VagasGrandesPreenchidas.Where(x => x.VeiculoTipo.Equals(EVeiculoTipo.Van)).ToList());
-
-        //        return vans;
-        //    }
-        //}
+        [NotMapped]
+        public IEnumerable<EstacionamentoVeiculo> VagasGrandePreenchidas =>
+            VagasPreenchidas.Where(x => x.Tipo.Equals(EVeiculoTipo.Van));
 
         private Estacionamento()
         {
