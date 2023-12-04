@@ -2,7 +2,7 @@
 
 ## Executar o projeto:
 
-1 - Baixar/clonar: 
+### 1 - Baixar/clonar: 
 
 ```
 git clone https://github.com/joaocarias/jcf.estacionamento.git
@@ -18,7 +18,7 @@ Encontra-se em: Jcf.Estacionamento/
 
 Encontra-se em: jcf-frontend-estacionamento/
 
-2 - Configs
+### 2 - Configs
 
 A Api foi desenvolvido em .net core 7.0 e  MySQL Server como banco de dados. É necessário configurar a conexão do banco nos appsettings.
 
@@ -32,7 +32,7 @@ A Api foi desenvolvido em .net core 7.0 e  MySQL Server como banco de dados. É 
 
 O frontend foi desenvolvido em Angular Framework utilizando a versão 16.2.0.
 
-3 - Executar o projeto
+### 3 - Executar o projeto
 
 ```
 cd jcf.estacionamento/
