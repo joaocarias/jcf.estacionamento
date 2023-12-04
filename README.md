@@ -8,12 +8,19 @@
 git clone https://github.com/joaocarias/jcf.estacionamento.git
 ```
 
-A Api do projeto se encontra em 
+O projeto encontra-se divido em duas partes:
 
+1.1 - Api 
+
+Encontra-se em: Jcf.Estacionamento/
+
+1.2 - Frontend
+
+Encontra-se em: jcf-frontend-estacionamento/
 
 2 - Configs
 
-A Apil foi desenvolvido em .net core 7.0 e  MySQL Server como banco de dados. É necessário configurar a conexão do banco nos appsettings.
+A Api foi desenvolvido em .net core 7.0 e  MySQL Server como banco de dados. É necessário configurar a conexão do banco nos appsettings.
 
 ```
   "ConnectionStrings": {
